@@ -1,0 +1,14 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.blogspot.fuud-java</groupId>
+    <artifactId>jautohash-transformer-parent</artifactId>
+    <version>1.0</version>
+    <name>${artifactId}</name>
+    
+    <modules>
+        <module>jautohash-transformer</module>
+        <module>jautohash-tests</module>
+    </modules>
+</project>
