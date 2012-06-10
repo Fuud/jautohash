@@ -1,4 +1,9 @@
-package com.blogspot.fuud.java.jautohash.agent;
+package com.blogspot.fuud.java.jautohash;
+
+import com.blogspot.fuud.java.jautohash.agent.AgentInitialization;
+import com.blogspot.fuud.java.jautohash.agent.EqualsTransformer;
+import com.blogspot.fuud.java.jautohash.agent.HashCodeTransformer;
+import com.blogspot.fuud.java.jautohash.agent.InstrumentationHolder;
 
 import java.lang.instrument.Instrumentation;
 

@@ -1,6 +1,6 @@
 package com.blogspot.fuud.java.tests;
 
-import com.blogspot.fuud.java.jautohash.agent.InstrumentationUtils;
+import com.blogspot.fuud.java.jautohash.InstrumentationUtils;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class Foo {
         return InstrumentationUtils.hashCode(this);
     }
 
-
+    /*
     public boolean equals_ide(Object o) {
         if (this == o) return true;
         if (!(o instanceof Foo)) return false;
@@ -51,7 +51,7 @@ public class Foo {
         result = 31 * result + (c != null ? c.hashCode() : 0);
         return result;
     }
-
+     */
     @Override
     public String toString() {
         return "Foo{" +
