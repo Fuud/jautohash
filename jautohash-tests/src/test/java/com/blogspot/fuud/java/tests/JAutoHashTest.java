@@ -48,32 +48,41 @@ public class JAutoHashTest {
         assertFalse(foo5.hashCode() == foo1.hashCode());
         assertFalse(foo6.hashCode() == foo1.hashCode());
     }
-/*
-    @Test
-    public void testEqualsExtends() throws Exception {
-        assertEquals(fooExt1, fooExt2);
-        assertEquals(fooExt2, fooExt1);
-        assertEquals(fooExt1, fooExt1);
 
-        assertFalse(fooExt3.equals(fooExt1));
-        assertFalse(fooExt4.equals(fooExt1));
-        assertFalse(fooExt5.equals(fooExt1));
-        assertFalse(fooExt6.equals(fooExt1));
-        assertFalse(fooExt7.equals(fooExt1));
+    @Test
+    public void testPrimitive() throws Exception {
+        final PrimitiveTypes object1 = new PrimitiveTypes(true, (byte) 1, 'c', (short) 2, 3, 4L, 5.0f, 6.0);
+        final PrimitiveTypes object2 = new PrimitiveTypes(true, (byte) 1, 'c', (short) 2, 3, 4L, 5.0f, 6.0);
+        assertEquals(object1, object2);
+        assertEquals(object1.hashCode(), object2.hashCode());
     }
 
-    @Test
-    public void testHashCodeExtends() throws Exception {
-        assertEquals(fooExt1.hashCode(), fooExt2.hashCode());
-        assertEquals(fooExt1.hashCode(), fooExt1.hashCode());
+    /*
+   @Test
+   public void testEqualsExtends() throws Exception {
+       assertEquals(fooExt1, fooExt2);
+       assertEquals(fooExt2, fooExt1);
+       assertEquals(fooExt1, fooExt1);
 
-        // next probably can be wrong (non equals objects can have same hashCode).
-        // But for well-distributed hash function we can check next conditions
+       assertFalse(fooExt3.equals(fooExt1));
+       assertFalse(fooExt4.equals(fooExt1));
+       assertFalse(fooExt5.equals(fooExt1));
+       assertFalse(fooExt6.equals(fooExt1));
+       assertFalse(fooExt7.equals(fooExt1));
+   }
 
-        assertFalse(fooExt3.hashCode() != fooExt1.hashCode());
-        assertFalse(fooExt4.hashCode() != fooExt1.hashCode());
-        assertFalse(fooExt5.hashCode() != fooExt1.hashCode());
-        assertFalse(fooExt6.hashCode() != fooExt1.hashCode());
-        assertFalse(fooExt7.hashCode() != fooExt1.hashCode());
-    } */
+   @Test
+   public void testHashCodeExtends() throws Exception {
+       assertEquals(fooExt1.hashCode(), fooExt2.hashCode());
+       assertEquals(fooExt1.hashCode(), fooExt1.hashCode());
+
+       // next probably can be wrong (non equals objects can have same hashCode).
+       // But for well-distributed hash function we can check next conditions
+
+       assertFalse(fooExt3.hashCode() != fooExt1.hashCode());
+       assertFalse(fooExt4.hashCode() != fooExt1.hashCode());
+       assertFalse(fooExt5.hashCode() != fooExt1.hashCode());
+       assertFalse(fooExt6.hashCode() != fooExt1.hashCode());
+       assertFalse(fooExt7.hashCode() != fooExt1.hashCode());
+   } */
 }

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public final class AgentInitialization {
     private static final String javaSpecVersion = System.getProperty("java.specification.version");
     private static final boolean jdk6OrLater = "1.6".equals(javaSpecVersion) || "1.7".equals(javaSpecVersion);
-    private static final Pattern JAR_REGEX = Pattern.compile(".*new-instance-transformer[-.\\d]*.jar");
+    private static final Pattern JAR_REGEX = Pattern.compile(".*jautohash[-.\\d]*.jar");
 
     private static boolean initialized = false;
 
