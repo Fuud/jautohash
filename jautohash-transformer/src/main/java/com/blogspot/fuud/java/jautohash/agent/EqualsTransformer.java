@@ -19,21 +19,21 @@ public class EqualsTransformer implements ClassFileTransformer {
         this.classToInstrument = clazz.getName().replace('.', '/');
     }
 
-    public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
+    public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classFileBuffer) throws IllegalClassFormatException {
         if (!className.equals(classToInstrument)) {
             return null;
         }
 
         try {
-            return transformImpl(classfileBuffer);
+            return transformImpl(classFileBuffer);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
 
-    private byte[] transformImpl(byte[] classfileBuffer) throws IOException, NotFoundException, CannotCompileException {
-        CtClass clazz = ClassPool.getDefault().makeClass(new ByteArrayInputStream(classfileBuffer));
+    private byte[] transformImpl(byte[] classFileBuffer) throws IOException, NotFoundException, CannotCompileException {
+        CtClass clazz = ClassPool.getDefault().makeClass(new ByteArrayInputStream(classFileBuffer));
         final CtClass javaLangObject = ClassPool.getDefault().get("java.lang.Object");
 
         CtMethod hashCodeMethod;
