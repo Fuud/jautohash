@@ -9,7 +9,8 @@ import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
 import java.util.HashMap;
-import java.util.Map;
+
+import static com.blogspot.fuud.java.jautohash.agent.util.StrUtils.format;
 
 public class EqualsTransformer implements ClassFileTransformer {
     private String classToInstrument;
@@ -55,7 +56,6 @@ public class EqualsTransformer implements ClassFileTransformer {
 
         String bodyS = String.format("" +
                 "{" +
-                "   System.out.println(\"will be compared: \"+this+\" and \"+ $1);" +
                 "   if (this == $1) return true;" +
                 "   if (!($1 instanceof %s)) return false;" +
                 "   %s target = (%s) $1;",
@@ -67,7 +67,6 @@ public class EqualsTransformer implements ClassFileTransformer {
             final String asObjectTarget = "(($w)target." + ctField.getName() + ")";
 
             body.append(format("" +
-                    "        System.out.println(\"will be compared: \"+%(thisField)+\" and \"+ %(thatField)); \n" +
                     "        if (%(thisField) != null) {\n" +
                     "            if (! %(thisField).equals(%(thatField)) ) return false;\n" +
                     "            " +
@@ -82,25 +81,6 @@ public class EqualsTransformer implements ClassFileTransformer {
         body.append("return true;\n");
         body.append("}");
         hashCodeMethod.setBody(body.toString());
-    }
-
-    public static String format(String str, Map<String, Object> values) {
-
-        StringBuilder builder = new StringBuilder(str);
-
-        for (Map.Entry<String, Object> entry : values.entrySet()) {
-
-            int start;
-            String pattern = "%(" + entry.getKey() + ")";
-            String value = entry.getValue().toString();
-
-            // Replace every occurence of %(key) with value
-            while ((start = builder.indexOf(pattern)) != -1) {
-                builder.replace(start, start + pattern.length(), value);
-            }
-        }
-
-        return builder.toString();
     }
 
 }

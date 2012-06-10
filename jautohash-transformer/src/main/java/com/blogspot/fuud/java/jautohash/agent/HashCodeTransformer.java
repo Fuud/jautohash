@@ -1,16 +1,13 @@
 package com.blogspot.fuud.java.jautohash.agent;
 
 
-import com.blogspot.fuud.java.jautohash.agent.util.Singleton;
 import javassist.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
-import java.lang.reflect.Method;
 import java.security.ProtectionDomain;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class HashCodeTransformer implements ClassFileTransformer {
     private String classToInstrument;
