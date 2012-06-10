@@ -43,10 +43,10 @@ public class JAutoHashTest {
         // next probably can be wrong (non equals objects can have same hashCode).
         // But for well-distributed hash function we can check next conditions
 
-        assertFalse(foo3.hashCode() != foo1.hashCode());
-        assertFalse(foo4.hashCode() != foo1.hashCode());
-        assertFalse(foo5.hashCode() != foo1.hashCode());
-        assertFalse(foo6.hashCode() != foo1.hashCode());
+        assertFalse(foo3.hashCode() == foo1.hashCode());
+        assertFalse(foo4.hashCode() == foo1.hashCode());
+        assertFalse(foo5.hashCode() == foo1.hashCode());
+        assertFalse(foo6.hashCode() == foo1.hashCode());
     }
 /*
     @Test
