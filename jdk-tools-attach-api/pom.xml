@@ -12,5 +12,15 @@
     <groupId>com.blogspot.fuud-java</groupId>
     <artifactId>jdk-tools-attach-api</artifactId>
 
+    <distributionManagement>
+        <repository>
+            <id>repo</id>
+            <url>https://github.com/Fuud/mvn-repo/raw/master/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshot-repo</id>
+            <url>https://github.com/Fuud/mvn-repo/raw/master/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
