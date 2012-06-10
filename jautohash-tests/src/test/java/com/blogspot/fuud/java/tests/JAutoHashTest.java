@@ -14,7 +14,7 @@ public class JAutoHashTest {
     private final Foo foo4 = new Foo(1, "2", Arrays.asList("foo", "bar"));
     private final Foo foo5 = new Foo(1, "1", Arrays.asList("bar", "foo"));
     private final Foo foo6 = new Foo(1, "1", null);
-
+     /*
     private final ExtendsFoo fooExt1 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 1.0);
     private final ExtendsFoo fooExt2 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 1.0);
     private final ExtendsFoo fooExt3 = new ExtendsFoo(2, "1", Arrays.asList("fooExt", "bar"), 1.0);
@@ -22,7 +22,7 @@ public class JAutoHashTest {
     private final ExtendsFoo fooExt5 = new ExtendsFoo(1, "1", Arrays.asList("bar", "fooExt"), 1.0);
     private final ExtendsFoo fooExt6 = new ExtendsFoo(1, "1", null, 1.0);
     private final ExtendsFoo fooExt7 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 2.0);
-
+     */
     @Test
     public void testEquals() throws Exception {
         assertEquals(foo1, foo2);
@@ -48,7 +48,7 @@ public class JAutoHashTest {
         assertFalse(foo5.hashCode() != foo1.hashCode());
         assertFalse(foo6.hashCode() != foo1.hashCode());
     }
-
+/*
     @Test
     public void testEqualsExtends() throws Exception {
         assertEquals(fooExt1, fooExt2);
@@ -75,5 +75,5 @@ public class JAutoHashTest {
         assertFalse(fooExt5.hashCode() != fooExt1.hashCode());
         assertFalse(fooExt6.hashCode() != fooExt1.hashCode());
         assertFalse(fooExt7.hashCode() != fooExt1.hashCode());
-    }
+    } */
 }
