@@ -13,13 +13,15 @@ public class JAutoHashTest {
     private final Foo foo3 = new Foo(2, "1", Arrays.asList("foo", "bar"));
     private final Foo foo4 = new Foo(1, "2", Arrays.asList("foo", "bar"));
     private final Foo foo5 = new Foo(1, "1", Arrays.asList("bar", "foo"));
-    
+    private final Foo foo6 = new Foo(1, "1", null);
+
     private final ExtendsFoo fooExt1 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 1.0);
     private final ExtendsFoo fooExt2 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 1.0);
     private final ExtendsFoo fooExt3 = new ExtendsFoo(2, "1", Arrays.asList("fooExt", "bar"), 1.0);
     private final ExtendsFoo fooExt4 = new ExtendsFoo(1, "2", Arrays.asList("fooExt", "bar"), 1.0);
     private final ExtendsFoo fooExt5 = new ExtendsFoo(1, "1", Arrays.asList("bar", "fooExt"), 1.0);
-    private final ExtendsFoo fooExt6 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 2.0);
+    private final ExtendsFoo fooExt6 = new ExtendsFoo(1, "1", null, 1.0);
+    private final ExtendsFoo fooExt7 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 2.0);
 
     @Test
     public void testEquals() throws Exception {
@@ -30,6 +32,7 @@ public class JAutoHashTest {
         assertFalse(foo3.equals(foo1));
         assertFalse(foo4.equals(foo1));
         assertFalse(foo5.equals(foo1));
+        assertFalse(foo6.equals(foo1));
     }
 
     @Test
@@ -43,6 +46,7 @@ public class JAutoHashTest {
         assertFalse(foo3.hashCode()!=foo1.hashCode());
         assertFalse(foo4.hashCode()!=foo1.hashCode());
         assertFalse(foo5.hashCode()!=foo1.hashCode());
+        assertFalse(foo6.hashCode()!=foo1.hashCode());
     }
     
     @Test
@@ -54,6 +58,8 @@ public class JAutoHashTest {
         assertFalse(fooExt3.equals(fooExt1));
         assertFalse(fooExt4.equals(fooExt1));
         assertFalse(fooExt5.equals(fooExt1));
+        assertFalse(fooExt6.equals(fooExt1));
+        assertFalse(fooExt7.equals(fooExt1));
     }
 
     @Test
@@ -68,5 +74,6 @@ public class JAutoHashTest {
         assertFalse(fooExt4.hashCode()!=fooExt1.hashCode());
         assertFalse(fooExt5.hashCode()!=fooExt1.hashCode());
         assertFalse(fooExt6.hashCode()!=fooExt1.hashCode());
+        assertFalse(fooExt7.hashCode()!=fooExt1.hashCode());
     }
 }
