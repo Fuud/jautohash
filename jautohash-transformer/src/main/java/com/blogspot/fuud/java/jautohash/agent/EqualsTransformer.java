@@ -51,7 +51,7 @@ public class EqualsTransformer implements ClassFileTransformer {
         return bytes;
     }
 
-    private void setBody(CtClass clazz, CtMethod hashCodeMethod) throws CannotCompileException {
+    private void setBody(CtClass clazz, CtMethod hashCodeMethod) throws CannotCompileException, NotFoundException {
         final String clazzName = clazz.getName();
 
         String bodyS = String.format("" +
@@ -63,20 +63,29 @@ public class EqualsTransformer implements ClassFileTransformer {
 
         StringBuilder body = new StringBuilder(bodyS);
         for (CtField ctField : clazz.getDeclaredFields()) {
-            final String asObject = "(($w)" + ctField.getName() + ")";
-            final String asObjectTarget = "(($w)target." + ctField.getName() + ")";
+            final String thisField = ctField.getName();
+            final String thatField = "target." + ctField.getName();
 
-            body.append(format("" +
-                    "        if (%(thisField) != null) {\n" +
-                    "            if (! %(thisField).equals(%(thatField)) ) return false;\n" +
-                    "            " +
-                    "        } else {\n" +
-                    "            if (%(thatField) != null) return false;\n" +
-                    "        }",
-                    new HashMap<String, Object>() {{
-                        put("thisField", asObject);
-                        put("thatField", asObjectTarget);
-                    }}));
+            if (ctField.getType().isPrimitive()) {
+                body.append(
+                        format("if (%(thisField) != %(thatField)) return false;\n",
+                        new HashMap<String, Object>() {{
+                            put("thisField", thisField);
+                            put("thatField", thatField);
+                        }}));
+            } else {
+                body.append(format("" +
+                        "        if (%(thisField) != null) {\n" +
+                        "            if (! %(thisField).equals(%(thatField)) ) return false;\n" +
+                        "            " +
+                        "        } else {\n" +
+                        "            if (%(thatField) != null) return false;\n" +
+                        "        }",
+                        new HashMap<String, Object>() {{
+                            put("thisField", thisField);
+                            put("thatField", thatField);
+                        }}));
+            }
         }
         body.append("return true;\n");
         body.append("}");

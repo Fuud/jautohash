@@ -2,10 +2,12 @@ package com.blogspot.fuud.java.tests;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 public class JAutoHashTest {
     private final Foo foo1 = new Foo(1, "1", Arrays.asList("foo", "bar"));
@@ -14,15 +16,16 @@ public class JAutoHashTest {
     private final Foo foo4 = new Foo(1, "2", Arrays.asList("foo", "bar"));
     private final Foo foo5 = new Foo(1, "1", Arrays.asList("bar", "foo"));
     private final Foo foo6 = new Foo(1, "1", null);
-     /*
-    private final ExtendsFoo fooExt1 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 1.0);
-    private final ExtendsFoo fooExt2 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 1.0);
-    private final ExtendsFoo fooExt3 = new ExtendsFoo(2, "1", Arrays.asList("fooExt", "bar"), 1.0);
-    private final ExtendsFoo fooExt4 = new ExtendsFoo(1, "2", Arrays.asList("fooExt", "bar"), 1.0);
-    private final ExtendsFoo fooExt5 = new ExtendsFoo(1, "1", Arrays.asList("bar", "fooExt"), 1.0);
-    private final ExtendsFoo fooExt6 = new ExtendsFoo(1, "1", null, 1.0);
-    private final ExtendsFoo fooExt7 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 2.0);
-     */
+
+    /*
+   private final ExtendsFoo fooExt1 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 1.0);
+   private final ExtendsFoo fooExt2 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 1.0);
+   private final ExtendsFoo fooExt3 = new ExtendsFoo(2, "1", Arrays.asList("fooExt", "bar"), 1.0);
+   private final ExtendsFoo fooExt4 = new ExtendsFoo(1, "2", Arrays.asList("fooExt", "bar"), 1.0);
+   private final ExtendsFoo fooExt5 = new ExtendsFoo(1, "1", Arrays.asList("bar", "fooExt"), 1.0);
+   private final ExtendsFoo fooExt6 = new ExtendsFoo(1, "1", null, 1.0);
+   private final ExtendsFoo fooExt7 = new ExtendsFoo(1, "1", Arrays.asList("fooExt", "bar"), 2.0);
+    */
     @Test
     public void testEquals() throws Exception {
         assertEquals(foo1, foo2);
@@ -55,6 +58,36 @@ public class JAutoHashTest {
         final PrimitiveTypes object2 = new PrimitiveTypes(true, (byte) 1, 'c', (short) 2, 3, 4L, 5.0f, 6.0);
         assertEquals(object1, object2);
         assertEquals(object1.hashCode(), object2.hashCode());
+    }
+
+    @Test
+    public void testPerformance() throws Exception {
+        final ForLoadTest object1 = new ForLoadTest(true, (byte) 1, 'c', (short) 2, 3, 4L, 5.0f, 6.0, new ArrayList<Object>(), null);
+        final ForLoadTest object2 = new ForLoadTest(true, (byte) 1, 'c', (short) 2, 3, 4L, 5.0f, 6.0, new ArrayList<Object>(), null);
+
+        // jit it!
+        for (int i = 0; i < 10000000; i++) {
+            object1.equals(object2);
+            object1.hashCode();
+            object1.equals_ide(object2);
+            object1.hashCode_ide();
+        }
+
+        final long startNew = System.currentTimeMillis();
+        for (int i = 0; i < 10000000; i++) {
+            object1.equals(object2);
+            object1.hashCode();
+        }
+        final long time = System.currentTimeMillis() - startNew;
+
+        final long startNew2 = System.currentTimeMillis();
+        for (int i = 0; i < 10000000; i++) {
+            object1.equals_ide(object2);
+            object1.hashCode_ide();
+        }
+        final long time2 = System.currentTimeMillis() - startNew2;
+
+        assertTrue(time2 - time < time * 0.1);
     }
 
     /*
